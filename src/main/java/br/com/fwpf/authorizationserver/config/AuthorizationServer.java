@@ -1,11 +1,8 @@
 package br.com.fwpf.authorizationserver.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -27,12 +24,6 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 	private AuthenticationManager authenticationManager;
 	private AuthenticationKeyGenerator authenticationKeyGenerator = new UniqueAuthenticationKeyGenerator();
 
-	private TokenStore tokenStore() {
-		InMemoryTokenStore inMemoryTokenStore = new InMemoryTokenStore();
-		inMemoryTokenStore.setAuthenticationKeyGenerator(authenticationKeyGenerator);
-		return inMemoryTokenStore;
-	}
-
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.withClientDetails(clientDetailsService);
@@ -48,8 +39,10 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 		security.checkTokenAccess("isAuthenticated()");
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	private TokenStore tokenStore() {
+		InMemoryTokenStore inMemoryTokenStore = new InMemoryTokenStore();
+		inMemoryTokenStore.setAuthenticationKeyGenerator(authenticationKeyGenerator);
+		return inMemoryTokenStore;
 	}
+
 }
