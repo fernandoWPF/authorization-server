@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SecurityTestController {
 
-	@GetMapping("/teste")
+	@GetMapping("/echo")
 	@PreAuthorize("hasAuthority('READY')")
 	public String echo() {
 		return "Echo";
