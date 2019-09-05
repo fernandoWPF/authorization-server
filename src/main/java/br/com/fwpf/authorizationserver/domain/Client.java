@@ -15,7 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
 @Document(collection = "user")
-public class User implements ClientDetails {
+public class Client implements ClientDetails {
 
 	private static final long serialVersionUID = 1L;
 	private static final Set<String> SCOPE = new HashSet<>(Arrays.asList("all"));
@@ -26,13 +26,13 @@ public class User implements ClientDetails {
 
 	@Id
 	private String id;
-	private String username;
-	private String password;
+	private String clientId;
+	private String secret;
 	private Collection<Authority> authorities;
 
 	@Override
 	public String getClientId() {
-		return username;
+		return clientId;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class User implements ClientDetails {
 
 	@Override
 	public String getClientSecret() {
-		return password;
+		return secret;
 	}
 
 	@Override

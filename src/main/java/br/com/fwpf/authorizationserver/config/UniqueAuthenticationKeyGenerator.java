@@ -39,7 +39,7 @@ public class UniqueAuthenticationKeyGenerator implements AuthenticationKeyGenera
 		Map<String, Serializable> extentions = authorizationRequest.getExtensions();
 		String uuid = null;
 		if (extentions == null) {
-			extentions = new HashMap<String, Serializable>(1);
+			extentions = new HashMap<>(1);
 			uuid = UUID.randomUUID().toString();
 			extentions.put(UUID_KEY, uuid);
 		} else {

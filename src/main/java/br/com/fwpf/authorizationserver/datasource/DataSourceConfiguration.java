@@ -11,26 +11,26 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.mongodb.MongoClientURI;
 
-import br.com.fwpf.authorizationserver.repository.UserRepository;
+import br.com.fwpf.authorizationserver.repository.ClientRepository;
 
-@Configuration
-@EnableMongoRepositories(basePackageClasses = UserRepository.class, mongoTemplateRef = "mongoTemplate")
+@Configuration("dsAuthorizationServer")
+@EnableMongoRepositories(basePackageClasses = ClientRepository.class, mongoTemplateRef = "authorizationServerMongoTemplate")
 public class DataSourceConfiguration {
 
-	@Value("${authorization.ds.uri}")
-	private String uri;
+    @Value("${authorization.ds.uri}")
+    private String uri;
 
-	@Primary
-	@Bean(name = "mongoTemplate")
-	public MongoTemplate mongoTemplate() {
-		return new MongoTemplate(mongoDbFactory());
-	}
+    @Primary
+    @Bean(name = "authorizationServerMongoTemplate")
+    public MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongoDbFactory());
+    }
 
-	@Primary
-	@Bean
-	public MongoDbFactory mongoDbFactory() {
-		MongoClientURI mongoClientURI = new MongoClientURI(uri);
-		return new SimpleMongoDbFactory(mongoClientURI);
-	}
+    @Primary
+    @Bean("authorizationServerMongoDbFactory")
+    public MongoDbFactory mongoDbFactory() {
+        MongoClientURI mongoClientURI = new MongoClientURI(uri);
+        return new SimpleMongoDbFactory(mongoClientURI);
+    }
 
 }
