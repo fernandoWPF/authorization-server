@@ -4,7 +4,7 @@
 Utilizando o protocolo [OAuth2](https://oauth.net/2/), mediante um ```clientId``` e um ```secret``` válidos fornecido juntamente com __grant_type__ [client_credentials](https://oauth.net/2/grant-types/client-credentials/), o servidor autenticará e forncerá um token de acesso válido contendo as permissões do usuário.
 
 ## Como utilizar
-### 1 - Clonar o projeto
+### 1 - Clonar o projeto do git
 ```
 git clone https://github.com/fernandoWPF/authorization-server.git
 ```
@@ -14,16 +14,12 @@ mvn clean install
 ```
 ### 3 - Importar o artefato gerado dentro do resource que utilizará a autenticação
 ```
-<dependencies>
-        ...
-		<dependency>
-			<groupId>br.com.fwpf.security</groupId>
-			<artifactId>authorization-server</artifactId>
-			<version>1.0.0</version>
-			<classifier>exec</classifier>
-		</dependency>
-		...
-</dependencies>
+	<dependency>
+		<groupId>br.com.fwpf.security</groupId>
+		<artifactId>authorization-server</artifactId>
+		<version>1.0.0</version>
+		<classifier>exec</classifier>
+	</dependency>
 ```
 
 ### 4 - Anotar a classe principal do resource server com _@EnableAuthorizationServerConfigurer_. Exemplo:
@@ -48,7 +44,7 @@ public class ApisApplication {
 
 }
 ```
-### 5 - Definir o datasource do authorization server dentro do arquivo de propriedades do resource server da seguinte forma:
+### 5 - Definir o datasource do authorization-server dentro do arquivo de propriedades(arquivo propertie ou yml) do resource server, da seguinte forma:
 ```
 authorization:
   ds:
