@@ -44,12 +44,13 @@ public class ApisApplication {
 
 }
 ```
-### 5 - Definir o datasource do authorization-server dentro do arquivo de propriedades(arquivo propertie ou yml) do resource server, da seguinte forma:
+### 5 - Definir o datasource do authorization-server dentro do arquivo de propriedades(arquivo .properties ou .yml) do resource server, da seguinte forma:
 ```
 authorization:
   ds:
     uri: <URI de acesso ao banco de dados onde se encontra os usuários cadastrados>
 ```
+#### 5.1 - É necessário realizar a configuração do DataSource de forma manual. Veja [aqui](https://github.com/fernandoWPF/authorization-server/blob/master/src/main/java/br/com/fwpf/authorizationserver/datasource/DataSourceConfiguration.java) como o authorization-server está configurado. Da mesma forma deverá ser contruído o DataSource do resource server. Veja que na classe principal, excluímos a configuração automática do Mongo.
 
 ## Construído com
 
